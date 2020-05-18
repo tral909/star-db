@@ -1,2 +1,2 @@
-StarDb app
+StarDB app
 ------
