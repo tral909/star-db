@@ -24,11 +24,22 @@ import Row from '../row';
 
 export default class App extends Component {
 
-  swapiService = new DummySwapiService();
-
   state = {
     showRandomPlanet: true,
-    hasError: false
+    hasError: false,
+    swapiService: new DummySwapiService()
+  };
+
+  onServiceChange = () => {
+    this.setState(({ swapiService }) => {
+      const Service = swapiService instanceof SwapiService ? DummySwapiService : SwapiService;
+
+      console.log('switched to', Service.name);
+
+      return {
+        swapiService: new Service()
+      }
+    })
   };
 
   toggleRandomPlanet = () => {
@@ -58,7 +69,7 @@ export default class App extends Component {
       getStarship,
       getPersonImage,
       getStarshipImage
-    } = this.swapiService;
+    } = this.state.swapiService;
 
     const personDetails = (
       <ItemDetails
@@ -86,9 +97,9 @@ export default class App extends Component {
     );
 
     return (
-      <SwapiServiceProvider value={this.swapiService}>
+      <SwapiServiceProvider value={this.state.swapiService}>
         <div className="container stardb-app">
-          <Header />
+          <Header onServiceChange={this.onServiceChange}/>
 
           <PersonDetails itemId={11} />
 
