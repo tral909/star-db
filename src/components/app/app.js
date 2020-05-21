@@ -77,6 +77,8 @@ export default class App extends Component {
         <Header />
 
         <Row left={personDetails} right={starshipDetails} />
+
+        <PeoplePage />
       </div>
     );
   }
