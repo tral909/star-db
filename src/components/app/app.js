@@ -8,6 +8,16 @@ import PeoplePage from '../people-page';
 import SwapiService from '../../services/swapi-service';
 import ItemDetails, { Record } from '../item-details';
 
+import {
+  PersonList,
+  PlanetList,
+  StarshipList,
+  PersonDetails,
+  PlanetDetails,
+  StarshipDetails
+} from '../sw-components';
+
+
 import './app.css';
 import Row from '../row';
 
@@ -42,10 +52,12 @@ export default class App extends Component {
       <RandomPlanet /> :
       null;
 
-    const { getPerson,
+    const {
+      getPerson,
       getStarship,
       getPersonImage,
-      getStarshipImage } = this.swapiService;
+      getStarshipImage
+    } = this.swapiService;
 
     const personDetails = (
       <ItemDetails
@@ -75,6 +87,24 @@ export default class App extends Component {
     return (
       <div className="container stardb-app">
         <Header />
+
+        <PersonDetails itemId={11} />
+
+        <PlanetDetails itemId={5} />
+
+        <StarshipDetails itemId={9} />
+
+        <PersonList>
+          {({ name }) => <span>{name}</span>}
+        </PersonList>
+
+        <StarshipList>
+          {({ name }) => <span>{name}</span>}
+        </StarshipList>
+
+        <PlanetList>
+          {({ name }) => <span>{name}</span>}
+        </PlanetList>
 
         <Row left={personDetails} right={starshipDetails} />
 

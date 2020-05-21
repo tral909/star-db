@@ -59,8 +59,7 @@ export default class ItemDetails extends Component {
       return <span>Select a item from a list</span>;
     }
 
-    const { id, name, gender,
-              birthYear, eyeColor } = item;
+    const { name } = item;
 
     return (
       <div className="item-details card">
@@ -71,9 +70,9 @@ export default class ItemDetails extends Component {
         <div className="card-body">
           <h4>{name}</h4>
           <ul className="list-group list-group-flush">
-            { 
+            {
               React.Children.map(this.props.children, (child, idx) => {
-                // child это реакт компонент - immutable, чтобы его подменить и изменить надо сначала клонировать 
+                // child это реакт компонент - immutable, чтобы его подменить и изменить надо сначала клонировать
                 return React.cloneElement(child, { item }); // добавили свойство item
               })
             }

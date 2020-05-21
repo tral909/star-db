@@ -6,6 +6,8 @@ import SwapiService from '../../services/swapi-service';
 import Row from '../row';
 import ErrorBoundry from '../error-boundry';
 
+import { PersonList } from '../sw-components';
+
 import './people-page.css';
 
 export default class PeoplePage extends Component {
@@ -23,7 +25,7 @@ export default class PeoplePage extends Component {
   render() {
 
     const itemList = (
-      <ItemList
+      <PersonList
         onItemSelected={this.onPersonSelected}
         getData={this.swapiService.getAllPeople}>
 
@@ -31,7 +33,7 @@ export default class PeoplePage extends Component {
           `${i.name} (${i.birthYear})`
         )}
 
-      </ItemList>
+      </PersonList>
     );
 
     const personDetails = (
