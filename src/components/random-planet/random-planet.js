@@ -13,9 +13,15 @@ export default class RandomPlanet extends Component {
     loading: true
   };
 
+  // неутвержденный синтаксис, но в классе
+  static defaultProps = {
+    updateInterval: 10000
+  };
+
   componentDidMount() {
+    const { updateInterval } = this.props;
     this.updatePlanet();
-    this.interval = setInterval(this.updatePlanet, 7000);
+    this.interval = setInterval(this.updatePlanet, updateInterval);
   }
 
   componentWillUnmount() {
@@ -65,6 +71,11 @@ export default class RandomPlanet extends Component {
     );
   }
 }
+
+// утвержденный синтаксис, но не в классе
+// RandomPlanet.defaultProps = {
+//   updateInterval: 10000
+// };
 
 const PlanetView = ({ planet,  }) => {
 

@@ -3,7 +3,8 @@ import ItemList from '../item-list';
 import {
   withData,
   withSwapiService,
-  withChildFunction
+  withChildFunction,
+  compose
 } from '../hoc-helpers';
 
 

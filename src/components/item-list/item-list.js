@@ -23,7 +23,10 @@ const ItemList = (props) => {
       {items}
     </ul>
   );
+};
 
-}
+ItemList.defaultProps = {
+  onItemSelected: () => {}
+};
 
 export default ItemList;
