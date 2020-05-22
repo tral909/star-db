@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import './random-planet.css';
 import SwapiService from '../../services/swapi-service';
 import Spinner from '../spinner';
@@ -6,28 +7,34 @@ import ErrorIndicator from '../error-indicator';
 
 export default class RandomPlanet extends Component {
 
-  swapiService = new SwapiService();
-
-  state = {
-    planet: {},
-    loading: true
-  };
-
   // неутвержденный синтаксис, но в классе
   static defaultProps = {
     updateInterval: 10000
   };
 
+  // без prop-type библиотеки такой код для валидации пропса updateInterval
+  // static propTypes = {
+  //   updateInterval: (props, propName, componentName) => {
+  //     const value = props[propName];
+
+  //     if (typeof value === 'number' && !isNaN(value)) {
+  //       return null;
+  //     }
+
+  //     return new TypeError(`${componentName}: ${propName} must be number`);
+  //   }
+  // };
+
+  // c библиотекой
   static propTypes = {
-    updateInterval: (props, propName, componentName) => {
-      const value = props[propName];
+    updateInterval: PropTypes.number.isRequired
+  };
 
-      if (typeof value === 'number' && !isNaN(value)) {
-        return null;
-      }
+  swapiService = new SwapiService();
 
-      return new TypeError(`${componentName}: ${propName} must be number`);
-    }
+  state = {
+    planet: {},
+    loading: true
   };
 
   componentDidMount() {
@@ -51,12 +58,12 @@ export default class RandomPlanet extends Component {
   onError = (err) => {
     this.setState({
       error: true,
-      loading : false
+      loading: false
     });
   };
 
   updatePlanet = () => {
-    const id = Math.floor(Math.random()*17) + 2;
+    const id = Math.floor(Math.random() * 17) + 2;
     this.swapiService
       .getPlanet(id)
       .then(this.onPlanetLoaded)
@@ -70,7 +77,7 @@ export default class RandomPlanet extends Component {
 
     const errorMessage = error ? <ErrorIndicator /> : null;
     const spinner = loading ? <Spinner /> : null;
-    const content = hasData ? <PlanetView planet={planet}/> : null;
+    const content = hasData ? <PlanetView planet={planet} /> : null;
 
     return (
       <div className="random-planet jumbotron rounded">
@@ -87,10 +94,10 @@ export default class RandomPlanet extends Component {
 //   updateInterval: 10000
 // };
 
-const PlanetView = ({ planet,  }) => {
+const PlanetView = ({ planet, }) => {
 
   const { id, name, population,
-    rotationPeriod, diameter  } = planet;
+    rotationPeriod, diameter } = planet;
 
   return (
     <React.Fragment>

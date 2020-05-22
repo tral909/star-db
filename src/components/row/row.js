@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './row.css';
 
@@ -13,6 +14,11 @@ const Row = ({ left, right }) => {
       </div>
     </div>
   );
+};
+
+Row.propTypes = {
+  left: PropTypes.node, //node - это все то, что иожет отрендерить jsx
+  right: PropTypes.node //element - это только реакт компонент
 };
 
 export default Row;
