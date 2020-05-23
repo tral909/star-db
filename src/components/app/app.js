@@ -12,6 +12,7 @@ import { PeoplePage, PlanetsPage, StarshipsPage } from '../pages';
 import './app.css';
 
 import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { StarshipDetails } from '../sw-components';
 
 
 export default class App extends Component {
@@ -61,7 +62,13 @@ export default class App extends Component {
                 exact />
               <Route path="/people" component={PeoplePage} />
               <Route path="/planets" component={PlanetsPage} />
-              <Route path="/starships" component={StarshipsPage} />
+              <Route path="/starships" exact component={StarshipsPage} />
+              <Route
+                path="/starships/:id"
+                render={({ match, location, history }) => {
+                  const { id } = match.params;
+                  return <StarshipDetails itemId={id}/>
+                }} />
 
             </div>
           </Router>
