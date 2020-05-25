@@ -50,7 +50,7 @@ export default class App extends Component {
           <Router>
             <div className="container stardb-app">
               <Header onServiceChange={this.onServiceChange} />
-              <RandomPlanet updateInterval={2000} />
+              <RandomPlanet updateInterval={10000} />
 
               <Route
                 path="/"
@@ -60,7 +60,7 @@ export default class App extends Component {
                 path="/people"
                 render={() => <h2>People</h2>}
                 exact />
-              <Route path="/people" component={PeoplePage} />
+              <Route path="/people/:id?" component={PeoplePage} />
               <Route path="/planets" component={PlanetsPage} />
               <Route path="/starships" exact component={StarshipsPage} />
               <Route
